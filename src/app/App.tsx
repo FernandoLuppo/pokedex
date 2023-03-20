@@ -1,5 +1,11 @@
 import "./App.css"
+import { AppRoutes } from "./routes"
+import { BrowserRouter } from "react-router-dom"
 
 export const App: React.FC = () => {
-  return <div className="App">Teste</div>
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  )
 }

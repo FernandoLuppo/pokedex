@@ -1,4 +1,8 @@
-export const DarkTheme: () => void = () => ({
+import type { DefaultTheme } from "styled-components"
+
+export const DarkTheme:
+  | DefaultTheme
+  | ((theme: DefaultTheme) => DefaultTheme) = () => ({
   colors: {
     background: "#121212",
     dark: {

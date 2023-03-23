@@ -1,7 +1,6 @@
 import axios from "axios"
-
-const url = process.env.BASE_URL
+import { Environment } from "../../environment"
 
 export const Api = axios.create({
-  baseURL: url
+  baseURL: Environment.BASE_URL
 })

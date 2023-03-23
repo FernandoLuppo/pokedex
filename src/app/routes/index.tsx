@@ -4,7 +4,7 @@ import { Home, PageNotFound } from "../pages"
 export const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/404" element={<PageNotFound />} />
 
       <Route path="/*" element={<Navigate to="/404" />} />

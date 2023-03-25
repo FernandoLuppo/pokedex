@@ -1,7 +1,9 @@
-import type { IPokemon } from "../interfaces"
+import type { IPokemonFistVideo } from "../interfaces"
 import { Api } from "../services"
 
-const getById = async (pokemon: string | number): Promise<IPokemon | Error> => {
+const getById = async (
+  pokemon: string | number
+): Promise<IPokemonFistVideo | Error> => {
   try {
     const { data } = await Api.get(`/pokemon/${pokemon}`)
     if (data !== null) return data

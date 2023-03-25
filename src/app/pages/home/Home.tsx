@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react"
 import { usePokemon } from "../../shared/hooks"
-import type { IPokemon } from "../../shared/interfaces"
+import type { IPokemonFistVideo } from "../../shared/interfaces"
 import { Card } from "./components"
 
 export const Home: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>("")
-  const [pokemon, setPokemon] = useState<IPokemon>()
+  const [pokemon, setPokemon] = useState<IPokemonFistVideo>()
 
   const handleClick = useCallback(() => {
     if (searchValue !== "") {
@@ -14,10 +14,28 @@ export const Home: React.FC = () => {
         else setPokemon(res)
       })
     }
-
-    console.log(pokemon)
   }, [searchValue, setPokemon])
-  console.log(pokemon)
+
+  const sprites = useCallback((): string => {
+    if (pokemon !== undefined) {
+      const pokeSprites =
+        pokemon?.sprites.other["official-artwork"].front_default
+      return pokeSprites
+    } else return ""
+  }, [pokemon])
+
+  const animated = useCallback((): string => {
+    if (pokemon !== undefined) {
+      const pokeAnimated =
+        pokemon.sprites.versions["generation-v"]["black-white"].animated
+          .front_default
+
+      console.log(pokeAnimated)
+
+      return pokeAnimated
+    } else return ""
+  }, [pokemon])
+
   return (
     <main>
       <div>
@@ -32,9 +50,11 @@ export const Home: React.FC = () => {
 
       {pokemon !== undefined && (
         <Card
-          name={pokemon?.name}
-          sprites={pokemon.sprites.other["official-artwork"].front_default}
+          id={pokemon.id}
           key={pokemon?.name}
+          name={pokemon?.name}
+          sprites={sprites()}
+          preview={animated()}
         />
       )}
     </main>

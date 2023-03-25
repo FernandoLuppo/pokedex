@@ -1,6 +1,5 @@
 import styled from "styled-components"
-
-import type { IFlexBox } from "./IFlexBox"
+import type { IFlexBox } from "../interfaces"
 
 export const FlexBox = styled.div<IFlexBox>`
   display: flex;

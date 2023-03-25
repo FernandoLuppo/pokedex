@@ -1,2 +1,2 @@
 export * from "./Container"
-export * from "./flexbox/FlexBox"
+export * from "./FlexBox"

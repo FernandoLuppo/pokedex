@@ -1,7 +1,10 @@
+//  Components
+import { Card } from "./components"
+// Hooks
 import { useCallback, useState } from "react"
 import { usePokemon } from "../../shared/hooks"
+//  Types
 import type { IPokemonFistVideo } from "../../shared/interfaces"
-import { Card } from "./components"
 
 export const Home: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>("")
@@ -16,25 +19,31 @@ export const Home: React.FC = () => {
     }
   }, [searchValue, setPokemon])
 
-  const sprites = useCallback((): string => {
-    if (pokemon !== undefined) {
-      const pokeSprites =
-        pokemon?.sprites.other["official-artwork"].front_default
-      return pokeSprites
-    } else return ""
-  }, [pokemon])
+  const sprites = useCallback(
+    (value: string): string => {
+      if (pokemon !== undefined) {
+        switch (value) {
+          case "sprites":
+            return pokemon.sprites.other["official-artwork"].front_default
 
-  const animated = useCallback((): string => {
-    if (pokemon !== undefined) {
-      const pokeAnimated =
-        pokemon.sprites.versions["generation-v"]["black-white"].animated
-          .front_default
+          case "animated":
+            return pokemon.sprites.versions["generation-v"]["black-white"]
+              .animated.front_default
 
-      console.log(pokeAnimated)
+          case "type1":
+            return pokemon.types[0].type.name
 
-      return pokeAnimated
-    } else return ""
-  }, [pokemon])
+          case "type2":
+            if (pokemon.types[1] !== undefined)
+              return pokemon.types[1].type.name
+            else return ""
+          default:
+            return ""
+        }
+      } else return ""
+    },
+    [pokemon]
+  )
 
   return (
     <main>
@@ -42,7 +51,7 @@ export const Home: React.FC = () => {
         <input
           type="text"
           onChange={e => {
-            setSearchValue(e.target.value)
+            setSearchValue(e.target.value.toLocaleLowerCase())
           }}
         />
         <button onClick={handleClick}>Procurar</button>
@@ -52,9 +61,11 @@ export const Home: React.FC = () => {
         <Card
           id={pokemon.id}
           key={pokemon?.name}
+          type1={sprites("type1")}
+          type2={sprites("type2")}
           name={pokemon?.name}
-          sprites={sprites()}
-          preview={animated()}
+          sprites={sprites("sprites")}
+          preview={sprites("animated")}
         />
       )}
     </main>

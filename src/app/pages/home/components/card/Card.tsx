@@ -1,21 +1,38 @@
 import { FlexBox } from "../../../../shared/components"
-import type { TPokemonType } from "../../../../shared/interfaces"
 import * as S from "./Card.styles"
 
 interface ICard {
   id: number
   name: string
-  type: TPokemonType
+  type1: string
+  type2?: string
   sprites: string
-  preview?: string
+  preview: string
 }
 
-export const Card: React.FC<ICard> = ({ id, name, sprites, preview }) => {
+export const Card: React.FC<ICard> = ({
+  id,
+  name,
+  type1,
+  type2,
+  sprites,
+  preview
+}) => {
   return (
     <S.Container gap="xs" align="center" justify="center" direction="column">
       <FlexBox align="center" justify="flex-end" direction="row">
         <S.PokemonText>#{id}</S.PokemonText>
       </FlexBox>
+      {type2 !== "" ? (
+        <FlexBox align="center" justify="space-around" direction="row">
+          <S.PokemonText>{type1}</S.PokemonText>
+          <S.PokemonText>{type2}</S.PokemonText>
+        </FlexBox>
+      ) : (
+        <FlexBox align="center" justify="center" direction="row">
+          <S.PokemonText>{type1}</S.PokemonText>
+        </FlexBox>
+      )}
       <S.PokemonSpot align="center" justify="center" direction="column">
         <S.PokemonSprit src={sprites} alt={name} />
       </S.PokemonSpot>

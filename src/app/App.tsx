@@ -1,8 +1,11 @@
-import { AppRoutes } from "./routes"
+//  Dependencies
 import { BrowserRouter } from "react-router-dom"
+//  Components
+import { AppRoutes } from "./routes"
+//  Theme
 import { ResetCss } from "./shared/theme/globalStyles"
-import { ThemeProvider } from "styled-components"
 import { DarkTheme } from "./shared/theme/darkTheme"
+import { ThemeProvider } from "styled-components"
 
 export const App: React.FC = () => {
   return (

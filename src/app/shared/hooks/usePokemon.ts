@@ -1,5 +1,7 @@
-import type { IPokemonFistVideo } from "../interfaces"
+//  Dependencies
 import { Api } from "../services"
+//  Types
+import type { IPokemonFistVideo } from "../interfaces"
 
 const getById = async (
   pokemon: string | number
@@ -7,8 +9,7 @@ const getById = async (
   try {
     const { data } = await Api.get(`/pokemon/${pokemon}`)
     if (data !== null) return data
-
-    return new Error("Error to try get the Pokemon.")
+    else return new Error("Error to try get the Pokemon.")
   } catch (error) {
     return new Error(
       ((error as { message: string }).message = "Este Pokemon não existe")

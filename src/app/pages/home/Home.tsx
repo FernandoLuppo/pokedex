@@ -3,6 +3,8 @@ import { Card } from "./components"
 // Hooks
 import { useCallback, useState } from "react"
 import { usePokemon } from "../../shared/hooks"
+//  Styles
+import * as S from "./Home.styles"
 //  Types
 import type { IPokemonFistVideo } from "../../shared/interfaces"
 
@@ -46,7 +48,8 @@ export const Home: React.FC = () => {
   )
 
   return (
-    <main>
+    <S.Main align="center" justify="flex-start" direction="column">
+      <h2>Digite o nome de um Pokémon</h2>
       <div>
         <input
           type="text"
@@ -68,6 +71,6 @@ export const Home: React.FC = () => {
           preview={sprites("animated")}
         />
       )}
-    </main>
+    </S.Main>
   )
 }
